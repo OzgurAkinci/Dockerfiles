@@ -1,8 +1,7 @@
 # Getting Started
 
-#### 1. docker build and create image
+#### 1. docker cheatsheet
 ```
-$ docker build -t learn/spring-boot-test:latest .
+![Screenshot](https://github.com/OzgurAkinci/spring-boot-kubernetes-and-docker/blob/main/git_resources/pods.png?raw=true)
 ```
 
-![Screenshot](https://github.com/OzgurAkinci/spring-boot-kubernetes-and-docker/blob/main/git_resources/pods.png?raw=true)
