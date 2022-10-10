@@ -1,34 +1,25 @@
-version: "3"
+version: '3'
 
 services:
-  postgres:
-    container_name: keycloak_postgresql
-    image: postgres:14-alpine
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=keycl0ak
-      - POSTGRES_USER=superuser
-      - POSTGRES_PASSWORD=superpassword
-    ports:
-      - 5438:5438
   keycloak:
-    container_name: keycloak
     image: quay.io/keycloak/keycloak:legacy
-    command:
-      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
     environment:
       DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
+      DB_ADDR: keycloak_postgresql # <<< This is the address, change it to your external db ip/domain
+      #DB_PORT: 5432
       DB_DATABASE: keycl0ak
       DB_USER: superuser
+      DB_SCHEMA: public
       DB_PASSWORD: superpassword
       KEYCLOAK_USER: superuser
       KEYCLOAK_PASSWORD: superpassword
+      KEYCLOAK_LOGLEVEL: DEBUG
+      ROOT_LOGLEVEL: DEBUG
     ports:
-      - 8080:8080
-    depends_on:
-      - postgres
-volumes:
-  postgres_data:
-    driver: local
+      - 8100:8100
+    command: ["-Djboss.http.port=8100"]
+    networks:
+      - hemenyanimdaNetwork
+networks:
+  hemenyanimdaNetwork:
+    external: true

@@ -5,7 +5,16 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8081:8080
+      - 8282:8282
+    command:
+    - 'php'
+    - '-S'
+    - '[::]:8282'
+    - '-t'
+    - '/var/www/html'
+    entrypoint:
+    - 'entrypoint.sh'
+    - 'docker-php-entrypoint'
     networks: 
       - hemenyanimdaNetwork
 networks:
