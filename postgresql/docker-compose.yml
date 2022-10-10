@@ -15,7 +15,7 @@ services:
       POSTGRES_USER: superuser
       POSTGRES_PASSWORD: superpassword
     ports:
-      - 5432:5432
+      - 5438:5432
     networks:
       - hemenyanimdaNetwork
 networks:
