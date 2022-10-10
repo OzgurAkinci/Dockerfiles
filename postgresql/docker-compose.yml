@@ -1,0 +1,23 @@
+version: "3"
+
+volumes:
+  postgres_data:
+    driver: local
+    
+services:
+  postgres:
+    container_name: keycloak_postgresql
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycl0ak
+      POSTGRES_USER: superuser
+      POSTGRES_PASSWORD: superpassword
+    ports:
+      - 5432:5432
+    networks:
+      - hemenyanimdaNetwork
+networks:
+  hemenyanimdaNetwork:
+    external: true
